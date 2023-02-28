@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Lab Experiments</title>
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico" >
+        <script src="placeholder.js"></script>
+        <style>
+            :root {
+                --border: 2px solid white;
+                background-color:white;
+                animation-name: animation;
+                animation-duration: 2s;
+            }
+            p{
+                border: var(--border);
+            }
+            @keyframes animation {
+              from {background-color: white;
+                    color: black;
+              }
+              to {background-color: black;
+                  color:white;
+                 
+                    
+                } 
+                
+            }
+            
+            #canvas:hover{
+                transform: translatex(100px);
+                transform: translatey(100px);
+                
+            }
+            
+            
+
+         </style>
+
+      </head>
+
+    <body>
+        
+        
+        <p style="border-width:2px; border-style:solid">square made with &ltcanvas&gt</p>
+        <canvas width="150" height="150" id="canvas">
+            Just a black box;couldn't be rendered
+        </canvas>
+        <p style="border-width:2px; border-style:solid">Hexagon made with &ltsvg&gt</p>
+        <script>
+            var box = document.getElementById("canvas");
+            var context = box.getContext("2d");
+            context.fillStyle="black";
+            context.fillRect(10,10,100,100);
+            
+        </script>
+
+        <svg width="100" height="100">
+            <polygon points = "50 3, 100 28, 100 75, 50 100, 3 75, 3 25" stroke="black" fill="purple" stroke-width="2" />
+        </svg>
+
+        <nav>
+            <ul>
+                <li><a href="./index.html">About Me</a></li>
+                <li><a href="https://github.com/Seneca78922" target="_blank">Github</a></li>
+                <li><a href="./Resume.html">Resume</a></li>
+                <li><a href="./Projects.html">Projects</a></li>
+                <li><a href="./Notes.html">Notes/Writeups</a></li>
+                <li><a href="./Experiments.html">Experiments for 134B</a></li>
+                
+            </ul>
+        </nav>
+
+        <hr>
+    
+      <p>This is a normal paragraph</p>
+      <aside>This is content not related to the above paragraph.</aside>  
+      <p><i>This is a li<br/>ne break with italics</i></p>
+      
+      <p><strong>THIS IS URGENT INFO</strong></p>
+      <p><em>THIS IS ALSO URGENT INFO</em></p>
+
+      <code>print("Hello World")</code>
+      <pre>Just Testing Some white               
+                           spacing
+      </pre>
+
+      <p>I was walking down the road,then suddenly 
+        <hr/>A horizontal line appeared.
+      </p>
+      
+      <picture>
+        <source srcset="./images/panda.png" media="(min-width:650px)">
+        <img src="./images/sloth.png" alt="sloth">
+      </picture>
+      
+      <figure>
+        <figcaption>Some example audio</figcaption>
+        <audio controls>
+        <source src="./audio/audio.m4a" type="audio/x-m4a" />
+        </audio>
+      </figure>
+      
+      <p></p>
+      <video controls muted width="300" height="300">
+        <source src="./videos/sample-mp4-file-small.mp4" type="video/mp4">
+      </video>
+     <hr>
+      <p> Here is an ordered list of my favorite foods in descending order of preference</p>
+      <ol>
+        <li>Thai</li>
+        <li>Japanese</li>
+        <li>Indian</li>
+      </ol>
+<hr>
+
+      
+    <form>
+        <fieldset>
+            <legend>Will you take the Red or Blue Pill</legend>
+            <input type="radio" id="Blue" name="pill" value="B">
+            <label for="Blue">Blue Pill</label><br>
+            <input type="radio" id="Bed" name="pill" value="R">
+            <label for="Red">Red Pill</label><br>
+        </fieldset>
+    </form>
+    <br>
+    <label for="pill-choice">Choose the red or blue pill:</label>
+    <input list="pill-choices" id="pill-choice" name="pill-choice">
+    
+    <datalist id="pill-choices">
+        <option value="Red pill">
+        <option value="Blue pill">
+    </datalist>
+    <br>
+    <hr>
+
+
+    <p>Possible Mailing List registration Form</p>
+    <form action="" method="get">
+        <label for="email"><b>Email Address:</b></label>
+        <input type="text" id="email" name="email">
+
+    </form>
+    <button name="button">Subscribe</button><br>
+    <br>
+
+    <label for="suggestions">Suggestions for improvement(max 500 words):</label><br>
+    <textarea id="suggestion" name="comment" maxlength="500">Enter Suggestion
+    </textarea>
+
+    <br><br>
+    <details>
+        <summary>Did You Know?</summary>
+        Some fun fact/trivia
+    </details>
+    </body>
+    <br><br>
+    <hr>
+    <table id="countries_to_visit">
+        <caption>Countries on my bucket list</caption>
+        <colgroup>
+            <col span="2" class="country">
+            <col span="2" class="visited">
+        </colgroup>
+
+        
+        
+        <tr>
+            <th scope="col">Country</th>
+            <th scope="col">Visited</th>
+        </tr>
+        <tr>
+            <td>China</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>Japan</td>
+            <td>True</td>
+        </tr>
+        <tr>
+            <td>Korea</td>
+            <td>False</td>
+        </tr>
+        <tr>
+            <td>Mongolia</td>
+            <td>False</td>
+        </tr>
+     
+    </table>
+
+    <template id="country_row">
+        <tr>
+            <td class="country"></td>
+            <td>Additional Country</td>
+        </tr>
+    </template>
+    
+    
+   
+
+</html>

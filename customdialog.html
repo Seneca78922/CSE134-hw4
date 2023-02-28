@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" >
+        <title>Custom Dialog Buttons</title>
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico" >
+        <script type="text/javascript" src="./purify.min.js"></script>
+        <script type="text/javascript" src="./purify.min.js.map"></script>
+        <script type="module" src="./customdialog.js"></script>
+    </head>
+    <body> 
+        <button id = "Alert">Alert</button>
+        <button id= "Confirm">Confirm</button>
+        <button id="Prompt">Prompt</button>
+        <br/>
+        <output name="confirmResponse" for="confirmBox" id="confirmOutput"></output>
+        <output name="promptResponse" for="Prompt" id="promptOutput"></output>
+
+        <dialog id="alertBox">
+            <p> Alert Pressed!</p>
+            <form method="dialog">
+            <button id="okBtnAlert">Ok</button>
+            </form>
+        </dialog>
+
+        <dialog id="confirmBox">
+            <p> Do you confirm this?</p>
+            <form method="dialog">
+            <button id="cancelBtnConfirm" value="false" type="submit">Cancel</button>
+            <button id="okBtnConfirm" value="true" type="submit">Ok</button>
+            </form>
+        </dialog>
+        <dialog id="promptBox">
+            <p> What is your name?</p>
+            <form method="dialog">
+            <input type="text" value="" id="userInput"/> <br/><br/>
+            <button id="cancelBtnConfirm" value="false" type="submit">Cancel</button> 
+            <button id="okBtnConfirm" value="true" type="submit">Ok</button>
+            </form>
+        </dialog>
+        <script type="module">
+        
+        import * as CD from "./customdialog.js";
+        
+        //confirm dialog setup is defined in customdialog.js
+        window.addEventListener("DOMContentLoaded", CD.alertDialogSetup);
+        window.addEventListener("DOMContentLoaded", CD.confirmDialogSetup);
+        window.addEventListener("DOMContentLoaded", CD.promptDialogSetup);
+        
+        
+        </script>
+        
+    </body>
+</html>

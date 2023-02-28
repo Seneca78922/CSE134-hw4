@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <title>Custom Dialog Buttons</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <script type="text/javascript" src="./purify.min.js"></script>
+    <script type="text/javascript" src="./purify.min.js.map"></script>
+
+    <style>
+        /*each dialog box is black with white letters, buttons are grey with black letters*/
+        /*Each list item has not bullet points, is vertically aligned, has black background with borders and white text*/
+        /*Each list item has spaces vertically, has pen for edit btn, trash can for delete buttn*/
+
+
+        dialog {
+            background-color: black;
+        }
+
+        dialog p {
+            text-align: center;
+            color: white;
+        }
+
+        form label {
+            color: white;
+            text-align: center;
+        }
+
+        form input {
+            text-align: left;
+        }
+
+        li {
+            font-size: 20px;
+            text-align: center;
+            max-width: fit-content;
+            background-color: black;
+            color: white;
+            border-radius: 12px;
+            border: 3px solid black;
+            list-style: none;
+            margin-bottom: 1.5em;
+            padding: 20px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+    </style>
+</head>
+</body>
+<h1 style="text-align:center;">My Blog Posts</h1> <br />
+<hr />
+
+<ul id="list">
+
+</ul>
+<dialog id="deleteItem">
+    <p> Delete This Blog Post?</p>
+    <form method="dialog">
+        <button id="cancelBtnDelete" value="false" type="submit" onclick="return false">Cancel</button>
+        <button id="okBtnDelete" value="true" type="submit" onclick="return true">Yes</button>
+    </form>
+</dialog>
+
+<dialog id="editExisting">
+    <!--prefill the inputs with corresponding blog post values when event triggered-->
+    <form method="dialog">
+        <label for="postTitleEdit">Post Title</label><br />
+        <input type="text" value="" id="postTitleEdit" /><br />
+        <label for="postDateEdit">Post Date</label><br />
+        <input type="text" value="" id="postDateEdit" /><br />
+        <label for="postSummaryEdit">Post Summary</label><br />
+        <input type="text" value="" id="postSummaryEdit" />
+        <br /><br />
+        <button id="cancelBtnConfirm" value="false" type="submit">Cancel</button>
+        <button id="saveBtnEdit" value="true" type="submit">Save</button>
+    </form>
+</dialog>
+<!--attach to add button at bottom of body, add item created to localStorage-->
+<dialog id="addNew">
+    <p>Add a new blog post</p>
+    <form method="dialog">
+        <label for="postTitleAdd">Post Title</label><br />
+        <input type="text" value="" id="postTitleAdd" /><br />
+        <label for="postDateAdd">Post Date</label><br />
+        <input type="text" value="" id="postDateAdd" /><br />
+        <label for="postSummaryAdd">Post Summary</label><br />
+        <input type="text" value="" id="postSummaryAdd" />
+        <br /><br />
+        <button id="cancelBtnConfirm" value="false" type="submit">Cancel</button>
+        <button id="saveBtnAdd" value="true" type="submit">Save</button>
+    </form>
+</dialog>
+<script type="module">
+    import * as Blog from "./styledblog.js";
+
+
+    window.addEventListener("DOMContentLoaded", Blog.initBlogPosts);
+          //when dom loads, intialize the blog posts by looping through prepopulated array
+
+
+</script>
+
+
+
+
+</body>
+
+</html>

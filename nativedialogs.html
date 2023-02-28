@@ -1,70 +1,82 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta charset="utf-8" >
-        <title>Native Dialog Buttons</title>
-        <link rel="icon" type="image/x-icon" href="./images/favicon.ico" >
-        <script type="text/javascript" src="./purify.min.js"></script>
-        <script type="text/javascript" src="./purify.min.js.map"></script>
-    </head>
-    <body> 
-        <h1>Simple Dialogs?</h1>
-        <hr/>
-        <button id = "Alert">Alert</button>
-        <button id= "Confirm">Confirm</button>
-        <button id="Prompt">Prompt</button>
-        <button id="SaferPrompt">Safer Prompt</button>
-        <hr/>
-        <output name="confirmResponse" for="Confirm" id="confirmOutput"></output>
-        <output name="promptResponse" for="Prompt" id="promptOutput"></output>
-        <script>
-            confirmTest = function() {
-                response = confirm("Are you confirming?");
-                let confirmOutput = document.getElementById('confirmOutput');
-                confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
-                
-            }
-            promptTest = function() {
-                response = prompt("Are you happy?");
-                let promptOutput = document.getElementById('promptOutput');
-                if (response === null){
-                    promptOutput.innerHTML = "User didn't enter anything";
-                }
-                else {
-                    promptOutput.innerHTML = `The value returned by the prompt method is: (${response})`;
-                }  
-            }
-            saferPromptTest = function() {
-                responseDirty = prompt("Are you happy?");
-                let cleanResponse = DOMPurify.sanitize(responseDirty);
-                let saferPromptOutput = document.getElementById('promptOutput');
-                if (responseDirty === null){//just in case user presses cancel and response is null
-                    saferPromptOutput.innerHTML = "User didn't enter anything";
-                }
-                else {
-                    saferPromptOutput.innerHTML = `The value returned by the prompt method is: (${cleanResponse})`;
-                }  
-            }
 
-            window.addEventListener('DOMContentLoaded', function(){
-                let buttonAlert = document.getElementById('Alert');
-                buttonAlert.addEventListener('click',()=> { //at least one arrow syntax
+<head>
+    <meta charset="utf-8">
+    <title>Native Dialog Buttons</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <script type="text/javascript" src="./purify.min.js"></script>
+    <script type="text/javascript" src="./purify.min.js.map"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q7NF61LXYF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q7NF61LXYF');
+    </script>
+</head>
+
+<body>
+    <h1>Simple Dialogs?</h1>
+    <hr />
+    <button id="Alert">Alert</button>
+    <button id="Confirm">Confirm</button>
+    <button id="Prompt">Prompt</button>
+    <button id="SaferPrompt">Safer Prompt</button>
+    <hr />
+    <output name="confirmResponse" for="Confirm" id="confirmOutput"></output>
+    <output name="promptResponse" for="Prompt" id="promptOutput"></output>
+    <script>
+        confirmTest = function () {
+            response = confirm("Are you confirming?");
+            let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
+
+        }
+        promptTest = function () {
+            response = prompt("Are you happy?");
+            let promptOutput = document.getElementById('promptOutput');
+            if (response === null) {
+                promptOutput.innerHTML = "User didn't enter anything";
+            }
+            else {
+                promptOutput.innerHTML = `The value returned by the prompt method is: (${response})`;
+            }
+        }
+        saferPromptTest = function () {
+            responseDirty = prompt("Are you happy?");
+            let cleanResponse = DOMPurify.sanitize(responseDirty);
+            let saferPromptOutput = document.getElementById('promptOutput');
+            if (responseDirty === null) {//just in case user presses cancel and response is null
+                saferPromptOutput.innerHTML = "User didn't enter anything";
+            }
+            else {
+                saferPromptOutput.innerHTML = `The value returned by the prompt method is: (${cleanResponse})`;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            let buttonAlert = document.getElementById('Alert');
+            buttonAlert.addEventListener('click', () => { //at least one arrow syntax
                 alert('Alert');
-            }, true);});
-            window.addEventListener('DOMContentLoaded', function(){
-                let buttonConfirm = document.getElementById('Confirm');
-                buttonConfirm.addEventListener('click',confirmTest,true);
-            });
-            window.addEventListener('DOMContentLoaded', function(){
-                let buttonPrompt = document.getElementById('Prompt');
-                buttonPrompt.addEventListener('click',promptTest,true);
-            });
-            window.addEventListener('DOMContentLoaded', function(){
-                let buttonSaferPrompt = document.getElementById('SaferPrompt');
-                buttonSaferPrompt.addEventListener('click',saferPromptTest,true);
-            });
+            }, true);
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+            let buttonConfirm = document.getElementById('Confirm');
+            buttonConfirm.addEventListener('click', confirmTest, true);
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+            let buttonPrompt = document.getElementById('Prompt');
+            buttonPrompt.addEventListener('click', promptTest, true);
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+            let buttonSaferPrompt = document.getElementById('SaferPrompt');
+            buttonSaferPrompt.addEventListener('click', saferPromptTest, true);
+        });
 
-            
-        </script>
-    </body>
+
+    </script>
+</body>
+
 </html>

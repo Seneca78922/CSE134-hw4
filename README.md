@@ -2,4 +2,4 @@
 Name: Victoria Sasaoka
 PID: A16291078
 Site Link: https://sage-macaron-b564b0.netlify.app/
-Notes: crud.html works with blog.js, styledcrud.html with styledblog.js. I tested part 3/4 but there may be issues with localstorage not storing updated list of blogs upon reload. Also, I initially cloned hw3 repo and accidentally edited it, but reset all changes and uploaded files to hw4 repo(why commit history recent for hw3).Only Changes from HW3 site is adding resume, 2 projects, and google analytics.
+Notes: crud.html works with blog.js, styledcrud.html with styledblog.js. I initially cloned hw3 repo and accidentally edited it, but reset all changes and uploaded files to hw4 repo(why commit history is recent for hw3). Only Changes from HW3 site is adding resume in Resume.html, 2 projects in Projects.html, and google analytics to every html file. For part 3, I focused on getting the functionality of editing the list done so I only display the blog post sets as a string. The appearance is better in part 4. I prepopulated the list with 3 blog posts, and if the list becomes empty the same 3 blog posts will load on the next reload.

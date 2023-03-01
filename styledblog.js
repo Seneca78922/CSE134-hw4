@@ -1,9 +1,9 @@
 
-let lastID = 0;
+
 let allBlogPosts = JSON.parse(localStorage.getItem("1"));
 
 export function initBlogPosts() {
-  //get array from loadstorage if exists, if null then add intial blog posts to array
+  
   let blogList = document.getElementById("list");
   let addBtn = document.getElementById("addBtn");
     addBtn.onclick = function() {
@@ -48,7 +48,7 @@ export function initBlogPosts() {
     ];
 
     localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
-    lastID = 3; 
+   
     
   }
  
@@ -57,14 +57,15 @@ export function initBlogPosts() {
 
 
 function displayPosts() {
-  //loop through each element, turn to string, grab it
+  
   
   let blogList = document.getElementById("list");
   blogList.innerHTML = "";
   
   for (let i = 0; i < allBlogPosts.length; i++) {
     let blogPost = JSON.stringify(allBlogPosts[i]);
-    console.log(blogPost);
+    
+    //new is each list item having additional <p> element children - one for the post title, date, and summary of each blog post
     let listItem = document.createElement("li");
     let titleLine = document.createElement("p");
     titleLine.innerHTML="Post Title: " + allBlogPosts[i].postTitle;
@@ -75,16 +76,16 @@ function displayPosts() {
     let summaryLine = document.createElement("p");
     summaryLine.innerHTML="Post Summary: " + allBlogPosts[i].postSummary;
     listItem.appendChild(summaryLine);
-
+    //new is the edit button having a pencil image and delete button having a trash icon image.
     let editBtn = document.createElement("button");
     let deleteBtn = document.createElement("button");
     editBtn.innerText = "Edit";
-    editBtn.innerHTML = "<img src='images/pencil.png' width='20px'></img>";
+    editBtn.innerHTML = "<img src='images/pencil.png' width='20px'></img>"; 
     deleteBtn.innerText = "Delete";
     deleteBtn.innerHTML = "<img src='images/trash.png' width='20px'></img>";
     listItem.appendChild(editBtn);
     listItem.appendChild(deleteBtn);
-    blogList.appendChild(listItem); //makes invisible list items
+    blogList.appendChild(listItem); 
     
     deleteAndEditListeners(editBtn,deleteBtn,listItem,i);
     
@@ -98,10 +99,9 @@ function displayPosts() {
       deleteDialog.showModal();
       deleteDialog.addEventListener("close", () => {
         if (deleteDialog.returnValue != "false") {
-           allBlogPosts.splice(i,1); //changes inplace so changes indexing scheme
+           allBlogPosts.splice(i,1); 
            localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
-           
-          //  this.parentElement.remove();  
+               
           displayPosts();
         }
         deleteDialog.remove();
@@ -123,13 +123,8 @@ function displayPosts() {
            allBlogPosts[i].postTitle = editDialog.querySelector("#postTitleEdit").value;
            allBlogPosts[i].postDate = editDialog.querySelector("#postDateEdit").value;
            allBlogPosts[i].postSummary = editDialog.querySelector("#postSummaryEdit").value;
-           
-           //listItem.childNodes[0].textContent = JSON.stringify(allBlogPosts[i]);
            displayPosts();
-           console.log(listItem.childNodes[0]);
-           
-           console.log(allBlogPosts[i]);
-           localStorage.setItem("1", JSON.stringify(allBlogPosts));  //update storage
+           localStorage.setItem("1", JSON.stringify(allBlogPosts));  
           
         }
         editDialog.remove();

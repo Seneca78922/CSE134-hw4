@@ -1,7 +1,7 @@
-//alert box result -> alert pressed box
-//confirm result -> do you confirm this?, confirm result:
-//prompt result -> what is your name, prompt result (sanitized):
-//impoting dompurify, worry about domcontentloaded timing
+//alert button pressed -> alert dialog popup
+//confirm button pressed -> "do you confirm this" dialog popup, confirm result displayed as output
+//prompt result -> "what is your name" input form popup, prompt result (sanitized with DOMPurify) as output
+
 
 export function alertDialogSetup() {
   let alertBtn = document.getElementById("Alert");

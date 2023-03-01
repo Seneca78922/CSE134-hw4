@@ -3,7 +3,7 @@ let lastID = 0;
 let allBlogPosts = JSON.parse(localStorage.getItem("1"));
 
 export function initBlogPosts() {
-  //get array from loadstorage if exists, if null then add intial blog posts to array
+  //event handler for the add blog post button -> create a blog post, update localstorage and the list items displayed
   let blogList = document.getElementById("list");
   let addBtn = document.getElementById("addBtn");
     addBtn.onclick = function() {
@@ -24,11 +24,12 @@ export function initBlogPosts() {
           allBlogPosts.push(newBlog);
           localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
           addDialog.remove()
-          displayPosts(); 
+          displayPosts();  //update display (list items in the page)
 
         }
     });
    }
+  //get array from loadstorage if exists, if null or empty then add intial blog posts to array
   if (allBlogPosts === null || allBlogPosts.length === 0) {
     allBlogPosts = [
       {
@@ -55,8 +56,8 @@ export function initBlogPosts() {
   displayPosts();
 }
 
-/* grab first item, iterate over each object, convert to string
-   make it list item, append to list
+/* grab each blog post as a string, append that and an edit and delete button to a list item to be displayed.
+   Add event handlers for edit and delete buttons of that blog that launches a dialog.
 */
 function displayPosts() {
   
@@ -81,7 +82,7 @@ function displayPosts() {
     deleteAndEditListeners(editBtn,deleteBtn,listItem,i);
     
   }
-
+  //delete and edit button handlers to launch a dialog and edit/delete list item and update the localstorage.
   function deleteAndEditListeners(editBtn, deleteBtn, listItem, i) {
     deleteBtn.onclick = function () {
     
@@ -107,7 +108,7 @@ function displayPosts() {
       editDialog.querySelector("#postSummaryEdit").value= allBlogPosts[i].postSummary;
       editDialog.showModal();
       
-      console.log(i);
+     
       editDialog.addEventListener("close", () => {
         if (editDialog.returnValue != "false") {
            allBlogPosts[i].postTitle = editDialog.querySelector("#postTitleEdit").value;

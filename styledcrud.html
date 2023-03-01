@@ -87,7 +87,6 @@
         <button id="saveBtnEdit" value="true" type="submit">Save</button>
     </form>
 </dialog>
-<!--attach to add button at bottom of body, add item created to localStorage-->
 <dialog id="addNew">
     <p>Add a new blog post</p>
     <form method="dialog">
@@ -102,12 +101,13 @@
         <button id="saveBtnAdd" value="true" type="submit">Save</button>
     </form>
 </dialog>
+<button id="addBtn">Add new blog post</button>
 <script type="module">
     import * as Blog from "./styledblog.js";
 
-
+    //when dom loads, intialize the blog posts by looping through prepopulated array
     window.addEventListener("DOMContentLoaded", Blog.initBlogPosts);
-          //when dom loads, intialize the blog posts by looping through prepopulated array
+
 
 
 </script>

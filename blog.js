@@ -1,9 +1,47 @@
-localStorage.clear(); //delete if want persistent
+//localStorage.clear(); //delete if want persistent
 let lastID = 0;
 let allBlogPosts = JSON.parse(localStorage.getItem("1"));
 
 export function initBlogPosts() {
   //get array from loadstorage if exists, if null then add intial blog posts to array
+  let blogList = document.getElementById("list");
+  let addBtn = document.getElementById("addBtn");
+    addBtn.onclick = function() {
+    let addDialog = document.getElementById("addNew").cloneNode(true);
+    document.body.appendChild(addDialog);
+    addDialog.querySelector("#postTitleAdd").value= "";
+    addDialog.querySelector("#postDateAdd").value= "";
+    addDialog.querySelector("#postSummaryAdd").value ="";
+    addDialog.showModal();
+    addDialog.addEventListener("close", () =>{
+        if (addDialog.returnValue !="false"){
+          let newBlog = {
+            postTitle: addDialog.querySelector("#postTitleAdd").value,
+            postDate: addDialog.querySelector("#postDateAdd").value,
+            postSummary: addDialog.querySelector("#postSummaryAdd").value
+          }
+          
+          allBlogPosts.push(newBlog);
+          
+          // let listItem = document.createElement("li");
+          // listItem.appendChild(document.createTextNode(JSON.stringify(newBlog)));
+          // let editBtn = document.createElement("button");
+          // let deleteBtn = document.createElement("button");
+          // editBtn.innerText = "Edit";
+          // deleteBtn.innerText = "Delete";
+          // listItem.appendChild(editBtn);
+          // listItem.appendChild(deleteBtn);
+          // blogList.appendChild(listItem); //makes invisible list items
+          
+          localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
+          addDialog.remove()
+          displayPosts();
+          
+         
+
+        }
+    });
+   }
   if (allBlogPosts === null || allBlogPosts.length === 0) {
     allBlogPosts = [
       {
@@ -26,6 +64,7 @@ export function initBlogPosts() {
     
     localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
     lastID = 3; 
+    
   }
   //prepopulate array of blog posts with 3 blogs
   //have to make localstorage persist through different browser loads
@@ -42,43 +81,10 @@ export function initBlogPosts() {
 */
 function displayPosts() {
   //loop through each element, turn to string, grab it
+  
   let blogList = document.getElementById("list");
-  let addBtn = document.createElement("button");
-  addBtn.innerText= "Add blog post";
-  document.body.appendChild(addBtn);
-  addBtn.onclick = function() {
-    let addDialog = document.getElementById("addNew");
-    document.querySelector("#postTitleAdd").value= "";
-    document.querySelector("#postDateAdd").value= "";
-    document.querySelector("#postSummaryAdd").value ="";
-    addDialog.showModal();
-    addDialog.addEventListener("close", () =>{
-        if (addDialog.returnValue !="false"){
-          let newBlog = {
-            postTitle: document.querySelector("#postTitleAdd").value,
-            postDate: document.querySelector("#postDateAdd").value,
-            postSummary: document.querySelector("#postSummaryAdd").value
-          }
-          allBlogPosts.push(newBlog);
-          
-          let listItem = document.createElement("li");
-          listItem.appendChild(document.createTextNode(JSON.stringify(newBlog)));
-          let editBtn = document.createElement("button");
-          let deleteBtn = document.createElement("button");
-          editBtn.innerText = "Edit";
-          deleteBtn.innerText = "Delete";
-          listItem.appendChild(editBtn);
-          listItem.appendChild(deleteBtn);
-          blogList.appendChild(listItem); //makes invisible list items
-          
-          localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
-          deleteAndEditListeners(editBtn, deleteBtn,listItem);
-          
-          
-
-        }
-    });
-  }
+  blogList.innerHTML = "";
+  
   for (let i = 0; i < allBlogPosts.length; i++) {
     let blogPost = JSON.stringify(allBlogPosts[i]);
     console.log(blogPost);
@@ -94,86 +100,95 @@ function displayPosts() {
     listItem.appendChild(deleteBtn);
     blogList.appendChild(listItem); //makes invisible list items
     
-    deleteBtn.onclick = function () {
-      //dialog box (like confirm), ok or cancel
-        //remove string from list
-        //get index, remove from allBLogPosts, then put thatback into localstorage
+    // deleteBtn.onclick = function () {
+    //   //dialog box (like confirm), ok or cancel
+    //     //remove string from list
+    //     //get index, remove from allBLogPosts, then put thatback into localstorage
 
-      let deleteDialog = document.getElementById("deleteItem");
-      deleteDialog.showModal();
-      deleteDialog.addEventListener("close", () => {
-        if (deleteDialog.returnValue != "false") {
-           allBlogPosts.splice(i,1); //changes inplace so changes indexing scheme
-           localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
-           this.parentElement.remove();  
-        }
-      });
-    };
-    editBtn.onclick = function () {
-      let editDialog = document.getElementById("editExisting");
-      document.querySelector("#postTitleEdit").value= allBlogPosts[i].postTitle;
-      document.querySelector("#postDateEdit").value= allBlogPosts[i].postDate;
-      document.querySelector("#postSummaryEdit").value= allBlogPosts[i].postSummary;
-      editDialog.showModal();
+    //   let deleteDialog = document.getElementById("deleteItem");
+    //   deleteDialog.showModal();
+    //   deleteDialog.addEventListener("close", () => {
+    //     if (deleteDialog.returnValue != "false") {
+    //        allBlogPosts.splice(i,1); //changes inplace so changes indexing scheme
+    //        localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
+    //        this.parentElement.remove();  
+    //     }
+    //   });
+    // };
+    deleteAndEditListeners(editBtn,deleteBtn,listItem,i);
+    // editBtn.onclick = function () {
+    //   let editDialog = document.getElementById("editExisting");
+    //   document.querySelector("#postTitleEdit").value= allBlogPosts[i].postTitle;
+    //   document.querySelector("#postDateEdit").value= allBlogPosts[i].postDate;
+    //   document.querySelector("#postSummaryEdit").value= allBlogPosts[i].postSummary;
+    //   editDialog.showModal();
       
       
 
-      editDialog.addEventListener("close", () => {
-        if (editDialog.returnValue != "false") {
-           allBlogPosts[i].postTitle = document.querySelector("#postTitleEdit").value;
-           allBlogPosts[i].postDate = document.querySelector("#postDateEdit").value;
-           allBlogPosts[i].postSummary = document.querySelector("#postSummaryEdit").value;
+    //   editDialog.addEventListener("close", () => {
+    //     if (editDialog.returnValue != "false") {
+    //        allBlogPosts[i].postTitle = document.querySelector("#postTitleEdit").value;
+    //        allBlogPosts[i].postDate = document.querySelector("#postDateEdit").value;
+    //        allBlogPosts[i].postSummary = document.querySelector("#postSummaryEdit").value;
            
-           listItem.childNodes[0].textContent = JSON.stringify(allBlogPosts[i]);
-           console.log(listItem.childNodes[0]);
+    //        listItem.childNodes[0].textContent = JSON.stringify(allBlogPosts[i]);
+    //        console.log(listItem.childNodes[0]);
            
-           console.log(allBlogPosts[i]);
-           localStorage.setItem("1", JSON.stringify(allBlogPosts));  //update storage
+    //        console.log(allBlogPosts[i]);
+    //        localStorage.setItem("1", JSON.stringify(allBlogPosts));  //update storage
            
-        }
-      });
-    };
+    //     }
+    //   });
+    // };
   }
 
-  function deleteAndEditListeners(editBtn, deleteBtn, listItem) {
-    let i = allBlogPosts.length - 1;
+  function deleteAndEditListeners(editBtn, deleteBtn, listItem, i) {
+    
     deleteBtn.onclick = function () {
       //dialog box (like confirm), ok or cancel
         //remove string from list
         //get index, remove from allBLogPosts, then put thatback into localstorage
 
-      let deleteDialog = document.getElementById("deleteItem");
+      let deleteDialog = document.getElementById("deleteItem").cloneNode(true);
+      document.body.appendChild(deleteDialog);
       deleteDialog.showModal();
       deleteDialog.addEventListener("close", () => {
         if (deleteDialog.returnValue != "false") {
            allBlogPosts.splice(i,1); //changes inplace so changes indexing scheme
            localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
-           this.parentElement.remove();  
+           
+          //  this.parentElement.remove();  
+          displayPosts();
         }
+        deleteDialog.remove();
       });
+    
     };
     editBtn.onclick = function () {
-      let editDialog = document.getElementById("editExisting");
-      document.querySelector("#postTitleEdit").value= allBlogPosts[i].postTitle;
-      document.querySelector("#postDateEdit").value= allBlogPosts[i].postDate;
-      document.querySelector("#postSummaryEdit").value= allBlogPosts[i].postSummary;
+      let editDialog = document.getElementById("editExisting").cloneNode(true);
+      document.body.appendChild(editDialog);
+      editDialog.querySelector("#postTitleEdit").value= allBlogPosts[i].postTitle;
+      editDialog.querySelector("#postDateEdit").value= allBlogPosts[i].postDate;
+      editDialog.querySelector("#postSummaryEdit").value= allBlogPosts[i].postSummary;
       editDialog.showModal();
       
       
-
+     console.log(i);
       editDialog.addEventListener("close", () => {
         if (editDialog.returnValue != "false") {
-           allBlogPosts[i].postTitle = document.querySelector("#postTitleEdit").value;
-           allBlogPosts[i].postDate = document.querySelector("#postDateEdit").value;
-           allBlogPosts[i].postSummary = document.querySelector("#postSummaryEdit").value;
+           allBlogPosts[i].postTitle = editDialog.querySelector("#postTitleEdit").value;
+           allBlogPosts[i].postDate = editDialog.querySelector("#postDateEdit").value;
+           allBlogPosts[i].postSummary = editDialog.querySelector("#postSummaryEdit").value;
            
-           listItem.childNodes[0].textContent = JSON.stringify(allBlogPosts[i]);
+           //listItem.childNodes[0].textContent = JSON.stringify(allBlogPosts[i]);
+           displayPosts();
            console.log(listItem.childNodes[0]);
            
            console.log(allBlogPosts[i]);
            localStorage.setItem("1", JSON.stringify(allBlogPosts));  //update storage
-           
+          
         }
+        editDialog.remove();
       });
   }
 

@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <h1>Simple Dialogs?</h1>
+    <h1>Simple Dialogs</h1>
     <hr />
     <button id="Alert">Alert</button>
     <button id="Confirm">Confirm</button>
@@ -30,14 +30,22 @@
     <output name="promptResponse" for="Prompt" id="promptOutput"></output>
     <script>
         confirmTest = function () {
-            response = confirm("Are you confirming?");
             let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = "";
+            let promptOutput = document.getElementById('promptOutput');
+            promptOutput.innerHTML = "";
+            response = confirm("Are you confirming?");
+            confirmOutput = document.getElementById('confirmOutput');
             confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
 
         }
         promptTest = function () {
-            response = prompt("Are you happy?");
+            let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = "";
             let promptOutput = document.getElementById('promptOutput');
+            promptOutput.innerHTML = "";
+            response = prompt("Are you happy?");
+            promptOutput = document.getElementById('promptOutput');
             if (response === null) {
                 promptOutput.innerHTML = "User didn't enter anything";
             }
@@ -46,6 +54,10 @@
             }
         }
         saferPromptTest = function () {
+            let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = "";
+            let promptOutput = document.getElementById('promptOutput');
+            promptOutput.innerHTML = "";
             responseDirty = prompt("Are you happy?");
             let cleanResponse = DOMPurify.sanitize(responseDirty);
             let saferPromptOutput = document.getElementById('promptOutput');
@@ -60,7 +72,11 @@
         window.addEventListener('DOMContentLoaded', function () {
             let buttonAlert = document.getElementById('Alert');
             buttonAlert.addEventListener('click', () => { //at least one arrow syntax
-                alert('Alert');
+            let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = "";
+            let promptOutput = document.getElementById('promptOutput');
+            promptOutput.innerHTML = "";
+            alert('Alert');
             }, true);
         });
         window.addEventListener('DOMContentLoaded', function () {

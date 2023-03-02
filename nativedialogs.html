@@ -29,6 +29,12 @@
     <output name="confirmResponse" for="Confirm" id="confirmOutput"></output>
     <output name="promptResponse" for="Prompt" id="promptOutput"></output>
     <script>
+        function clearOutput() {
+            let confirmOutput = document.getElementById('confirmOutput');
+            confirmOutput.innerHTML = "";
+            let promptOutput = document.getElementById('promptOutput');
+            promptOutput.innerHTML = "";
+        }
         confirmTest = function () {
             let confirmOutput = document.getElementById('confirmOutput');
             confirmOutput.innerHTML = "";
@@ -38,52 +44,51 @@
             confirmOutput = document.getElementById('confirmOutput');
             confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
 
-        }
+        };
         promptTest = function () {
-            let confirmOutput = document.getElementById('confirmOutput');
-            confirmOutput.innerHTML = "";
-            let promptOutput = document.getElementById('promptOutput');
-            promptOutput.innerHTML = "";
-            response = prompt("Are you happy?");
-            promptOutput = document.getElementById('promptOutput');
-            if (response === null) {
-                promptOutput.innerHTML = "User didn't enter anything";
-            }
-            else {
-                promptOutput.innerHTML = `The value returned by the prompt method is: (${response})`;
-            }
+            setTimeout(clearOutput, 0);
+
+            setTimeout(() => {
+                response = prompt("Are you happy?");
+                promptOutput = document.getElementById('promptOutput');
+                if (response === null) {
+                    promptOutput.innerHTML = "User didn't enter anything";
+                }
+                else {
+                    promptOutput.innerHTML = `The value returned by the prompt method is: (${response})`;
+                }
+            }, 20); //This timeout is what worked for me to clear output first, not sure about other browsers
         }
         saferPromptTest = function () {
-            let confirmOutput = document.getElementById('confirmOutput');
-            confirmOutput.innerHTML = "";
-            let promptOutput = document.getElementById('promptOutput');
-            promptOutput.innerHTML = "";
-            responseDirty = prompt("Are you happy?");
-            let cleanResponse = DOMPurify.sanitize(responseDirty);
-            let saferPromptOutput = document.getElementById('promptOutput');
-            if (responseDirty === null) {//just in case user presses cancel and response is null
-                saferPromptOutput.innerHTML = "User didn't enter anything";
-            }
-            else {
-                saferPromptOutput.innerHTML = `The value returned by the prompt method is: (${cleanResponse})`;
-            }
+            setTimeout(clearOutput, 0);
+
+            setTimeout(() => {
+                responseDirty = prompt("Are you happy?");
+                let cleanResponse = DOMPurify.sanitize(responseDirty);
+                let saferPromptOutput = document.getElementById('promptOutput');
+                if (responseDirty === null) {//just in case user presses cancel and response is null
+                    saferPromptOutput.innerHTML = "User didn't enter anything";
+                }
+                else {
+                    saferPromptOutput.innerHTML = `The value returned by the prompt method is: (${cleanResponse})`;
+                }
+            }, 20);
         }
 
         window.addEventListener('DOMContentLoaded', function () {
             let buttonAlert = document.getElementById('Alert');
             buttonAlert.addEventListener('click', () => { //at least one arrow syntax
-            let confirmOutput = document.getElementById('confirmOutput');
-            confirmOutput.innerHTML = "";
-            let promptOutput = document.getElementById('promptOutput');
-            promptOutput.innerHTML = "";
-            alert('Alert');
+                setTimeout(clearOutput, 0);
+                setTimeOut(alert('Alert'), 20);
             }, true);
         });
         window.addEventListener('DOMContentLoaded', function () {
+
             let buttonConfirm = document.getElementById('Confirm');
             buttonConfirm.addEventListener('click', confirmTest, true);
         });
         window.addEventListener('DOMContentLoaded', function () {
+
             let buttonPrompt = document.getElementById('Prompt');
             buttonPrompt.addEventListener('click', promptTest, true);
         });

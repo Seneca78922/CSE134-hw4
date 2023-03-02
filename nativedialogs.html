@@ -36,15 +36,15 @@
             promptOutput.innerHTML = "";
         }
         confirmTest = function () {
-            let confirmOutput = document.getElementById('confirmOutput');
-            confirmOutput.innerHTML = "";
-            let promptOutput = document.getElementById('promptOutput');
-            promptOutput.innerHTML = "";
-            response = confirm("Are you confirming?");
-            confirmOutput = document.getElementById('confirmOutput');
-            confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
+            setTimeout(clearOutput, 0);
 
-        };
+            setTimeout(() => {
+                response = confirm("Are you confirming?");
+                confirmOutput = document.getElementById('confirmOutput');
+                confirmOutput.innerHTML = `The value returned by the confirm method is: (${response})`;
+            }, 20);
+
+        }
         promptTest = function () {
             setTimeout(clearOutput, 0);
 
@@ -88,7 +88,7 @@
         window.addEventListener('DOMContentLoaded', function () {
 
             let buttonConfirm = document.getElementById('Confirm');
-            buttonConfirm.addEventListener('click', confirmTest, true);
+            buttonConfirm.addEventListener('click', confirmTest);
         });
         window.addEventListener('DOMContentLoaded', function () {
 

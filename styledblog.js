@@ -80,9 +80,9 @@ function displayPosts() {
     let editBtn = document.createElement("button");
     let deleteBtn = document.createElement("button");
     editBtn.innerText = "Edit";
-    editBtn.innerHTML = "<img src='images/pencil.png' width='20px'></img>"; 
+    editBtn.innerHTML = "<img src='images/pencil.png' width='20px' height='20px'></img>"; 
     deleteBtn.innerText = "Delete";
-    deleteBtn.innerHTML = "<img src='images/trash.png' width='20px'></img>";
+    deleteBtn.innerHTML = "<img src='images/trash.png' width='20px' height='20px'></img>";
     listItem.appendChild(editBtn);
     listItem.appendChild(deleteBtn);
     blogList.appendChild(listItem); 
@@ -100,8 +100,8 @@ function displayPosts() {
       deleteDialog.addEventListener("close", () => {
         if (deleteDialog.returnValue != "false") {
            allBlogPosts.splice(i,1); 
-           localStorage.setItem("1", JSON.stringify(allBlogPosts)); 
-               
+           localStorage.setItem("1", JSON.stringify(allBlogPosts));    
+          
           displayPosts();
         }
         deleteDialog.remove();

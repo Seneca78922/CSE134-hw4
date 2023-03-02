@@ -74,13 +74,16 @@
                 }
             }, 20);
         }
+        alertTest = function () {
+            setTimeout(clearOutput, 0);
+            setTimeout(
+                () => { alert('Alert'); }, 20);
+        }
+
 
         window.addEventListener('DOMContentLoaded', function () {
             let buttonAlert = document.getElementById('Alert');
-            buttonAlert.addEventListener('click', () => { //at least one arrow syntax
-                setTimeout(clearOutput, 0);
-                setTimeOut(alert('Alert'), 20);
-            }, true);
+            buttonAlert.addEventListener('click', alertTest);
         });
         window.addEventListener('DOMContentLoaded', function () {
 
